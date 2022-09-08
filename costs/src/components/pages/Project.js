@@ -1,9 +1,10 @@
 import {parse, v4  as uuidv4} from 'uuid'
 
-import styles from './Project.module.css'
 
 import {useParams} from 'react-router-dom'
 import {useState, useEffect} from 'react'
+
+import styles from './Project.module.css'
 
 import Loading from '../layout/Loading'
 import Container from '../layout/Container'
@@ -17,14 +18,15 @@ function Project() {
    const {id} = useParams()
    
    const [ project, setProject] = useState([])
-   const [ services, setServices    ] = useState([])
    const [showPorjectForm, setShowPorjectForm] = useState(false)
+   const [showServiceForm, setShowServiceForm] = useState(false)
+   const [ services, setServices    ] = useState([])
    const [message,setMessage] = useState() 
    const [type,setType] = useState() 
-   const [showServiceForm, setShowServiceForm] = useState(false)
 
 
    useEffect(() => {
+    //para ver o loading
     setTimeout(() => {
         fetch(`http://localhost:5000/projects/${id}`, {
         method: 'GET',
@@ -127,6 +129,7 @@ function Project() {
         setProject(projectUpdated)
         setServices(servicesUpdated)
         setMessage('Serviço removido com sucesso!')
+        setType('success')
     })
     .catch(err => console.log(err))
 
